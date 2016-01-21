@@ -1,0 +1,31 @@
+.main-container {
+	position: relative;
+	top: 70px;
+	text-align: center;
+}
+
+table {
+	position: relative;
+	left: 50px;
+	top: 75px;
+	table-layout: fixed;
+	width: calc(100% - 100px);
+	text-align: center;
+	border-spacing: 0.5rem;
+	font-size: 12px;
+}
+
+th {
+	background-color: #E6E2EB;
+}
+
+td, th {
+	text-align: center;
+	border: 1px solid #999;
+	padding: 0.5rem;
+	overflow: hidden;
+}
+
+td:hover {
+	background-color: #E6E2EB;
+}
