@@ -142,7 +142,7 @@ angular.module('scheduleMaker', [])
           ['Sistemas de Computação [CPI - A4] T1', 'SC-T1']
         ],
         [
-          ['Sistemas de Computação [C3/303] PL1', 'SC-PL1'],
+          ['Sistemas de Computação [C3/303] PL7', 'SC-PL7'],
           ['Sistemas de Computação [C1/307] PL9', 'SC-PL9'],
           ['Lógica EI [C2/201] TP3', 'L-TP3'],
           ['Análise [C3/202] TP2', 'A-TP2'],
