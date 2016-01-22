@@ -4,9 +4,9 @@ angular.module('scheduleMaker', [])
     var ctrl = this;
 
     var selected = [];
-    var deselectedColor = 'white';
-    var selectedColor = 'green';
-    var conflictColor = 'red';
+    var deselectedColor = 'rgb(255, 255, 255)'; // Has to be rgba because it's checked in code
+    var selectedColor = 'rgb(200, 255, 200)'; // Has to be rgba because it's checked in code
+    var conflictColor = 'rgb(255, 200, 200)'; // Has to be rgba because it's checked in code
 
     ctrl.onSelect = function (selection, $event) {
 
@@ -20,8 +20,6 @@ angular.module('scheduleMaker', [])
         // Loop through the selected classes
         for (var i = 0; i < selected.length; i++) {
 
-          console.log('Checking for already selected');
-
           // Check if the new selection was already selected
           if (selection[1] === selected[i][1]) {
 
@@ -33,116 +31,86 @@ angular.module('scheduleMaker', [])
 
         }
 
-        // Check for conflicts
-
-        console.log('Checking for conflicts');
-
-        var conflicts = checkForConflicts(selection);
-
-        if (conflicts.length > 0) {
-
-          selectClassConflict(selection);
-
-          for (var i = 0; i < conflicts.length; i++) {
-            selectClassConflict(conflicts[i]);
-          }
-
-        } else {
-          selectClass(selection);
-        }
+        selectClass(selection);
       }
     };
 
     var deselectClass = function (selection) {
 
-      console.log('Deselecting class:');
-      console.log(selection);
-      console.log(selected.indexOf(selection));
-
       // Remove class from array
       selected.splice(selected.indexOf(selection), 1);
 
-      // Refresh selections, since the one we're deselecting could have been conflicting with others
-      for (var i = 0; i < selected.length; i++) {
-        ctrl.onSelect(selected[i]);
-      }
-      for (var i = 0; i < selected.length; i++) {
-        ctrl.onSelect(selected[i]);
-      }
-
       $('.' + selection[1]).css('background-color', deselectedColor);
+      $('.' + selection[1]).removeClass('selected');
+
+      // At the end of each action, check for conflicts
+      checkForConflicts();
     };
 
     var selectClassConflict = function (selection) {
 
-      console.log('Marking as conflicting:');
-      console.log(selection);
-
       selected.push(selection);
 
       $('.' + selection[1]).css('background-color', conflictColor);
+      $('.' + selection[1]).addClass('selected');
+
+      // At the end of each action, check for conflicts
+      checkForConflicts();
     };
 
     var selectClass = function (selection) {
 
-      console.log('Selecting class:');
-      console.log(selection);
-
       selected.push(selection);
 
       $('.' + selection[1]).css('background-color', selectedColor);
+      $('.' + selection[1]).addClass('selected');
+
+      // At the end of each action, check for conflicts
+      checkForConflicts();
     };
 
-    var checkForConflicts = function (selection) {
+    var checkForConflicts = function () {
 
-      var classPresent = false;
-      var selectedClassPresent = false;
-      var selectedClassThatIsPresent;
-      var conflicts = [];
+      var rows = $('tr');
 
-      // Loop through the days
-      for (var i = 0; i < ctrl.schedule.length; i++) {
+      for (var i = 0; i < rows.length; i++) {
 
-        // Loop through the hours
-        for (var j = 0; j < ctrl.schedule[i].length; j++) {
+        var selectedChildren = [];
 
-          // Loop through the classes
-          for (var k = 0; k < ctrl.schedule[i][j].length; k++) {
+        $(rows[i]).children('td').each(function () {
 
-            // If the class we selected now is present, make the flag true
-            if (ctrl.schedule[i][j][k][1] === selection[1]) {
-              classPresent = true;
+          // Here "this" refers to the current element on the loop
+          element = $(this);
+
+          if (element.hasClass('selected')) {
+
+            selectedChildren.push(element);
+          }
+
+          if (element.hasClass('last-of-the-hour')) {
+
+             // If more than one children is selected in this hour
+            if (selectedChildren.length > 1) {
+
+              // Highlight the conflicting classes
+              for (var j = 0; j < selectedChildren.length; j++) {
+                selectedChildren[j].css('background-color', conflictColor);
+              }
+
             } else {
 
-              // Loop through the selected classes
-              for (var l = 0; l < selected.length; l++) {
-
-                // If a class is selected and present, make the flag true
-                if (selected[l][1] === ctrl.schedule[i][j][k][1]) {
-
-                  selectedClassPresent = true;
-                  selectedClassThatIsPresent = selected[l];
-                }
+              // Make sure if there is one left in this hour, it is not highlighted as conflicting
+              for (var j = 0; j < selectedChildren.length; j++) {
+                selectedChildren[j].css('background-color', selectedColor);
               }
             }
+
+            selectedChildren = [];
           }
 
-          // If on the hour we just looped there is a selected class and the class
-          // we just selected, mark them both as in conflict
-          if (classPresent && selectedClassPresent) {
-            conflicts.push(selectedClassThatIsPresent);
-          } else {
-
-            // Moving to another hour, reset flags
-            classPresent = false;
-            selectedClassPresent = false;
-          }
-
-        }
+        });
       }
-
-      return conflicts;
-    }
+    };
 
     // Selected classes in the format ['Programação Imperativa [CPI - A4] T1', 'Programação Imperativa T1']
     var selected = [];
