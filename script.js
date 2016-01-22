@@ -4,9 +4,9 @@ angular.module('scheduleMaker', [])
     var ctrl = this;
 
     var selected = [];
-    var deselectedColor = 'rgb(255, 255, 255)'; // Has to be rgba because it's checked in code
-    var selectedColor = 'rgb(200, 255, 200)'; // Has to be rgba because it's checked in code
-    var conflictColor = 'rgb(255, 200, 200)'; // Has to be rgba because it's checked in code
+    var deselectedColor = '#FFFFFF';
+    var selectedColor = '#D9FBCD';
+    var conflictColor = '#FFD6E7';
 
     ctrl.onSelect = function (selection, $event) {
 
