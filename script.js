@@ -3,29 +3,145 @@ angular.module('scheduleMaker', [])
 
     var ctrl = this;
 
+    var selected = [];
     var deselectedColor = 'white';
     var selectedColor = 'green';
     var conflictColor = 'red';
 
     ctrl.onSelect = function (selection, $event) {
-      // $($event.target).css('background-color', 'red');
-      // ctrl.selected.push(selection);
 
+      // If no class has yet been selected, no need to do any checks
+      if (selected.length < 1) {
 
+        selectClass(selection)
 
-      for (var i = 0; i < selected.length; i++) {
+      } else {
 
-        if (selection[1] == selected[i][1]) {
+        // Loop through the selected classes
+        for (var i = 0; i < selected.length; i++) {
 
-          // This class was already selected
-          deselectClass(selection);
+          console.log('Checking for already selected');
+
+          // Check if the new selection was already selected
+          if (selection[1] === selected[i][1]) {
+
+            // Deselect it
+            deselectClass(selection);
+
+            return;
+          }
+
         }
 
-      };
+        // Check for conflicts
+
+        console.log('Checking for conflicts');
+
+        var conflicts = checkForConflicts(selection);
+
+        if (conflicts.length > 0) {
+
+          selectClassConflict(selection);
+
+          for (var i = 0; i < conflicts.length; i++) {
+            selectClassConflict(conflicts[i]);
+          }
+
+        } else {
+          selectClass(selection);
+        }
+      }
     };
 
-    var deselectClass = function (class) {
-      $('.' + class[1]).css('background-color', 'white');
+    var deselectClass = function (selection) {
+
+      console.log('Deselecting class:');
+      console.log(selection);
+      console.log(selected.indexOf(selection));
+
+      // Remove class from array
+      selected.splice(selected.indexOf(selection), 1);
+
+      // Refresh selections, since the one we're deselecting could have been conflicting with others
+      for (var i = 0; i < selected.length; i++) {
+        ctrl.onSelect(selected[i]);
+      }
+      for (var i = 0; i < selected.length; i++) {
+        ctrl.onSelect(selected[i]);
+      }
+
+      $('.' + selection[1]).css('background-color', deselectedColor);
+    };
+
+    var selectClassConflict = function (selection) {
+
+      console.log('Marking as conflicting:');
+      console.log(selection);
+
+      selected.push(selection);
+
+      $('.' + selection[1]).css('background-color', conflictColor);
+    };
+
+    var selectClass = function (selection) {
+
+      console.log('Selecting class:');
+      console.log(selection);
+
+      selected.push(selection);
+
+      $('.' + selection[1]).css('background-color', selectedColor);
+    };
+
+    var checkForConflicts = function (selection) {
+
+      var classPresent = false;
+      var selectedClassPresent = false;
+      var selectedClassThatIsPresent;
+      var conflicts = [];
+
+      // Loop through the days
+      for (var i = 0; i < ctrl.schedule.length; i++) {
+
+        // Loop through the hours
+        for (var j = 0; j < ctrl.schedule[i].length; j++) {
+
+          // Loop through the classes
+          for (var k = 0; k < ctrl.schedule[i][j].length; k++) {
+
+            // If the class we selected now is present, make the flag true
+            if (ctrl.schedule[i][j][k][1] === selection[1]) {
+              classPresent = true;
+            } else {
+
+              // Loop through the selected classes
+              for (var l = 0; l < selected.length; l++) {
+
+                // If a class is selected and present, make the flag true
+                if (selected[l][1] === ctrl.schedule[i][j][k][1]) {
+
+                  selectedClassPresent = true;
+                  selectedClassThatIsPresent = selected[l];
+                }
+              }
+            }
+          }
+
+          // If on the hour we just looped there is a selected class and the class
+          // we just selected, mark them both as in conflict
+          if (classPresent && selectedClassPresent) {
+            conflicts.push(selectedClassThatIsPresent);
+          } else {
+
+            // Moving to another hour, reset flags
+            classPresent = false;
+            selectedClassPresent = false;
+          }
+
+        }
+      }
+
+      return conflicts;
     }
 
     // Selected classes in the format ['Programação Imperativa [CPI - A4] T1', 'Programação Imperativa T1']
