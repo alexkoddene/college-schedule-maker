@@ -117,88 +117,87 @@ angular.module('scheduleMaker', [])
 
     // The schedule in the format schedule[day][hour][class][display name/id]
     ctrl.schedule = [
-      [
+      [ // monday
         [
-          ['Programação Imperativa [CPI - A4] T1', 'PI-T1']
+          ['Estatística Aplicada [CPI - A4] T1', 'EA-T1a']
         ],
         [
-          ['Lógica EI [C2/309] TP3', 'L-TP3'],
-          ['Programação Imperativa [C3/403] TP7', 'PI-TP7'],
-          ['Lógica EI [C3/304] TP2', 'L-TP2'],
-          ['Análise [C3/202] TP3', 'A-TP3'],
-          ['Laboratórios de Informática II [DI-1.09] PL2', 'LIII-PL2']
+          ['Estatística Aplicada [CPI - C1/316] TP4', 'EA-TP4'],
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/201] TP3', 'SD-TP3'],
+          ['Engenharia Económica [CPI - C1/314] TP3', 'EE-TP3'],
+          ['Algoritmos e Complexidade [CPI - C1/216] TP2', 'AC-TP2'],
+          ['Arquitetura de Computadores [EEUM_G - DI-0.12] PL1', 'AC-PL1']
         ],
         [
-          ['Sistemas de Computação [C2/210] PL1', 'SC-PL1'],
-          ['Sistemas de Computação [C2/211] PL10', 'SC-PL10'],
-          ['Tópicos de Física Moderna [C2/304] TP1', 'TFM-TP1'],
-          ['Análise [C1/318] TP5', 'A-TP5'],
-          ['Programação Imperativa [C2/207] TP1', 'PI-TP1'],
-          ['Programação Imperativa [C1/208] TP3', 'PI-TP3']
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/201] TP1', 'SD-TP1'],
+          ['Arquitetura de Computadores [EEUM_G - DI-0.12] PL4', 'AC-PL4'],
+          ['Algoritmos e Complexidade [CPI - C1/314] TP3', 'AC-TP3']
         ]
       ],
-      [
+      [ //tuesday
         [
-          ['Sistemas de Computação [CPI - A4] T1', 'SC-T1']
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/303] TP1', 'SD-TP1'],
+          ['Estatística Aplicada [CPI - C1/220] TP3', 'EA-TP3']
         ],
         [
-          ['Sistemas de Computação [C3/303] PL7', 'SC-PL7'],
-          ['Sistemas de Computação [C1/307] PL9', 'SC-PL9'],
-          ['Lógica EI [C2/201] TP3', 'L-TP3'],
-          ['Análise [C3/202] TP2', 'A-TP2'],
-          ['Laboratórios de Informática II [DI-0.10] PL5', 'LIII-PL5']
+          ['Arquitetura de Computadores [EEUM_G - DI-0.12] PL5', 'AC-PL5']
         ],
         [
-          ['Sistemas de Computação [C1/103] PL3', 'SC-PL3'],
-          ['Sistemas de Computação [C1/309] PL6', 'SC-PL6'],
-          ['Tópicos de Física Moderna [C2/307] TP4', 'TFM-TP4'],
-          ['Lógica EI [C2/105] TP1', 'L-TP1'],
-          ['Programação Imperativa [C3/404] TP4', 'PI-TP4'],
-          ['Programação Imperativa [C2/106] TP5', 'PI-TP5']
+          ['Engenharia Económica [CPI A4] T1', 'EE-T1b']
+        ],
+        [
+          ['Algoritmos e Complexidade [CPI - A4] T1', 'AC-T1c']
+        ],
+        [
+          ['Comunicação de Dados [CPI - A4] T1', 'CD-T1d']
+        ],
+        [
+          ['Comunicação de Dados [CPI - C1/314] TP4', 'CD-TP4'],
+          ['Comunicação de Dados [CPI - C1/303] TP3', 'CD-TP3']
         ]
       ],
-      [
+      [ //wednesday
         [
-          ['Laboratórios de Informática II [DI-0.02] PL6', 'LIII-PL6'],
-          ['Sistemas de Computação [C2/212] PL2', 'SC-PL2'],
-          ['Sistemas de Computação [C2/303] PL5', 'SC-PL5'],
-          ['Análise [C3/202] TP2', 'A-TP2'],
-          ['Análise [C2/111] TP4', 'A-TP4'],
-          ['Laboratórios de Informática II  [DI-1.05] PL1', 'LIII-PL1']
+          ['Engenharia Económica [CPI - C1/311] TP2','EE-TP2'],
+          ['Comunicação de Dados [CPI - C1/315] TP1', 'CD-TP1']
         ],
         [
-          ['Tópicos de Física Moderna [C2/303] TP2', 'TFM-TP2'],
-          ['Tópicos de Física Moderna [C3/301] TP5', 'TFM-TP5'],
-          ['Lógica EI [C3/302] TP4', 'L-TP4'],
-          ['Análise [C3/202] TP1', 'A-TP1'],
-          ['Análise [C2/111] TP3', 'A-TP3']
+          ['Engenharia Económica [CPI - C1/216] TP4','EE-TP4'],
+          ['Engenharia Económica [CPI - C1/311] TP1','EE-TP1']
         ]
       ],
-      [
+      [ //thursday
         [
-          ['Laboratórios de Informática II [DI-0.05] PL7', 'LIII-PL7'],
-          ['Lógica EI [C3/302] TP1', 'L-TP1'],
-          ['Análise [C3/202] TP5', 'A-TP5'],
-          ['Laboratórios de Informática II [DI-0.12] PL4', 'LIII-PL4']
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/201] TP2', 'SD-TP2'],
+          ['Arquitetura de Computadores [EEUM_G - DI-1.04] PL2', 'AC-PL2']
         ],
         [
-          ['Programação Imperativa [C2/211] TP6', 'PI-TP6'],
-          ['Sistemas de Computação [C3/301] PL4', 'SC-PL4'],
-          ['Sistemas de Computação [C1/104] PL8', 'SC-PL8'],
-          ['Laboratórios de Informática II [DI-1.09] PL3', 'LIII-PL3'],
-          ['Lógica EI [C3/202] TP4', 'L-TP4'],
-          ['Programação Imperativa [C1/303] TP2', 'PI-TP2']
+          ['Arquitetura de Computadores [CPI - A4] T1', 'AC-T1e']
+        ],
+        [
+          ['Estatística Aplicada [CPI - C1/213] TP1', 'EA-TP1'],
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/201] TP3', 'SD-TP3'],
+          ['Comunicação de Dados [CPI - C1/315] TP2', 'CD-TP2'],
+          ['Algoritmos e Complexidade [CPI - C1/218] TP4', 'AC-TP4'],
+          ['Arquitetura de Computadores [EEUM_G - DI-0.12] PL3', 'AC-PL3']
+        ],
+        [
+          ['Estatística Aplicada [CPI - C1/213] TP2', 'EA-TP2'],
+          ['Introdução aos Sistemas Dinâmicos [CPI - C1/215] TP2', 'SD-TP2'],
+          ['Arquitetura de Computadores [EEUM_G - DI-0.12] PL6', 'AC-PL6'],
+          ['Algoritmos e Complexidade [CPI - C1/318] TP1', 'AC-TP1'],
+          ['Algoritmos e Complexidade [CPI - C1/315] TP5', 'AC-TP5']
         ]
       ],
-      [
+      [ //friday
         [
-          ['Lógica EI [C2/204] TP2', 'L-TP2'],
-          ['Tópicos de Física Moderna [C2/302] TP3', 'TFM-TP3'],
-          ['Análise [C2/203] TP1', 'A-TP1'],
-          ['Análise [C3/202] TP4', 'A-TP4']
+          ['Arquitetura de Computadores [CPI -A4] T1', 'AC-T1f']
         ],
         [
-          ['Tópicos de Física Moderna [CPI - A4] T1', 'TFM-T1']
+          ['Algoritmos e Complexidade [CPI - A4] T1', 'AC-T1g']
+        ],
+        [
+          ['Comunicação de Dados [CPI - A4] T1', 'CD-T1h']
         ]
       ]
     ];
